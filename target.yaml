@@ -1,0 +1,18 @@
+pipe: <f1>(<f2>)
+arrow: "lambda <arg>: <statement>"
+print: <tab>print(<str>)
+fun: def <name>
+single_try: |
+  <tab>try:
+  <tab>  <try_state>
+  <tab>except <err> as err:
+  <tab>  <except_state>
+itself: <tab><var>=<var>.<rest>
+ternary: <start><tru> if (<bol>) else <fals><end>
+condition: |
+  <tab>if <bol>:
+  <tab>  <name>(<args>)
+notdefined: <var> if '<var>' in locals() else <value>
+multy_eql: |
+  <tab><v1>=<v3>
+  <tab><v2>=<v3>

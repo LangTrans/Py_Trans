@@ -1,0 +1,46 @@
+notdefined:
+  regex: (<var>)\s*\|\|\s*(.+)(?:$|\))
+  tokens: [var,value]
+pipe:
+  regex: (.+)\|(.+)$
+  tokens: [f1,f2]
+  f2:
+    call: [pipe]
+print:
+  regex: <tab>p(".*")$
+  tokens: [tab,str]
+arrow:
+  regex: \((.*)\) => (.+)
+  tokens: [arg,statement]
+fun:
+  regex: fun\s[A-Za-z_]+
+  tokens: [name]
+single_try:
+  regex: <tab>try (.+) (.+) (.+)$
+  tokens: [tab,try_state,err,except_state]
+itself:
+  regex: <tab>=(<var>)\.(.+)$
+  tokens: [tab,var,rest]
+ternary:
+  regex: (=|\()(.+)\?(.+):(.+)($|\))
+  tokens: [start,bol,tru,fals,end]
+  bol,tru,fals:
+    replace:
+      - [<lstrip>]
+      - [<rstrip>]
+condition:
+  regex: <tab>(<var>)\((.+)\) if (.+)$
+  tokens: [tab,name,args,bol]
+multy_eql:
+  regex: <tab>(<var>)((?:=<var)+)=(<var>)$
+  tokens: [tab,v1,v2,v3]
+  v2:
+    replace:
+      - ["^="]
+settings:
+  loop: True
+  variables:
+    tab: ^(\t*)
+    lstip: "^\\s{1,}"
+    rstrip: "\\s{1,}$"
+    var: "[A-Za-z0-9_]+"
