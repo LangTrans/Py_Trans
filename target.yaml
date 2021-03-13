@@ -1,5 +1,7 @@
 pipe: <f1>(<f2>)
+arrow_fun: "<name> = lambda <args>:<statement>"
 arrow: "lambda <arg>: <statement>"
+arrow2list: map(<fun>,<list>)
 print: <tab>print(<str>)
 fun: def <name>
 single_try: |-
@@ -13,3 +15,6 @@ condition: |-
   <tab>if <bol>:
   <tab>  <name>(<args>)
 notdefined: <var> if '<var>' in locals() else <value>
+range: <comma>range(<start>,<end>+1)
+jrange: range(<start>,<end>+1,<jump>)
+listrange: list(<inside>)

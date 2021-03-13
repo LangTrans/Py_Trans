@@ -9,8 +9,14 @@ pipe:
 print:
   regex: <tab>p(".*")$
   tokens: [tab,str]
+arrow2list:
+  regex: (<var>)\s*=>\s*(.+)
+  tokens: [fun,list]
+arrow_fun:
+  regex: <tab>(<var>)<bracket>\s*=>\s*(.+)
+  tokens: [tab,name,args,statement]
 arrow:
-  regex: \((.*)\) => (.+)
+  regex: \((.*)\)\s*=>\s*(.+)
   tokens: [arg,statement]
 fun:
   regex: fun\s[A-Za-z_]+
@@ -29,8 +35,26 @@ ternary:
       - [<lstrip>]
       - [<rstrip>]
 condition:
-  regex: <tab>(<var>)\((.+)\) if (.+)$
+  regex: <tab>(<var>)<bracket> if (.+)$
   tokens: [tab,name,args,bol]
+#Some Haskell Syntax
+jrange:
+  regex: (\d+),(\d+)\.\.(\d+)
+  tokens: [jump,start,end]
+range:
+  regex: (,*)(\d+)\.\.(\d+)
+  tokens: [comma,start,end]
+  comma:
+    replace:
+      - ["^,",",*"]
+listrange:
+  regex: "!\\[(.+)\\]"
+  tokens: [inside]
+  inside:
+    call: [jrange,range]
+
+#-----------------------
+
 settings:
   loop: True
   variables:
@@ -38,3 +62,5 @@ settings:
     lstip: "^\\s{1,}"
     rstrip: "\\s{1,}$"
     var: "[A-Za-z0-9_]+"
+    bracket: \((.+)\)
+    
