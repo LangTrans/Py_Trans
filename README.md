@@ -30,4 +30,4 @@ if x:
   print("Done")
 ```
 
-If you find this more complicated than orginal or more syntax should added to it, feel free to edit yaml files with your preference.
+If you find this more complicated than original or more syntax should be added to it, feel free to edit YAML files with your preference
