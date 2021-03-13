@@ -12,7 +12,7 @@ test ="test"
 =test.replace("test","")
 x = True
 print((x||False)?"Done":"Failed")
-print("Done") if x
+print('x is not defined') if !x
 ```
 ## Orginal Syntax
 ```python
@@ -29,8 +29,8 @@ test ="test"
 test=test.replace("test","")
 x = True
 print("Done" if (x if 'x' in locals() else False) else "Failed")
-if x:
-  print("Done")
+if 'x' not in locals():
+  print('x is not defined')
 ```
 
 If you find this more complicated than original or more syntax should be added to it, feel free to edit YAML files with your preference
