@@ -22,7 +22,7 @@ itself:
   regex: <tab>=(<var>)\.(.+)$
   tokens: [tab,var,rest]
 ternary:
-  regex: (=|\()(.+)\?(.+):(.+)($|\))
+  regex: (=\s*|\()(.+)\?(.+):(.+)($|\))
   tokens: [start,bol,tru,fals,end]
   bol,tru,fals:
     replace:
@@ -31,12 +31,6 @@ ternary:
 condition:
   regex: <tab>(<var>)\((.+)\) if (.+)$
   tokens: [tab,name,args,bol]
-multy_eql:
-  regex: <tab>(<var>)((?:=<var)+)=(<var>)$
-  tokens: [tab,v1,v2,v3]
-  v2:
-    replace:
-      - ["^="]
 settings:
   loop: True
   variables:
