@@ -54,7 +54,9 @@ listrange:
     call: [jrange,range]
 
 #-----------------------
-
+chk_defined:
+  regex: "!(<var>)"
+  tokens: [var]
 settings:
   loop: True
   variables:
