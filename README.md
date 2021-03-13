@@ -3,9 +3,11 @@ Customize python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
 ## Customized Syntax
 ```js
 p"Hello World"
-add = (x) => x+1
-print|add|add(1)
-try add("1") Exception print("Error:",err)
+inc = (x) => x+1
+add(x,y)=>x+y
+print(![inc => 1..6])
+print|inc|inc(1)
+try inc("1") Exception print("Error:",err)
 test ="test"
 =test.replace("test","")
 x = True
@@ -15,13 +17,14 @@ print("Done") if x
 ## Orginal Syntax
 ```python
 print("Hello World")
-add = lambda x: x+1
-print(add(add(1)))
+inc = lambda x: x+1
+add = lambda x,y:x+y
+print(list(map(inc,range(1,6+1))))
+print(inc(inc(1)))
 try:
-  add("1")
+  inc("1")
 except Exception as err:
   print("Error:",err)
-
 test ="test"
 test=test.replace("test","")
 x = True
