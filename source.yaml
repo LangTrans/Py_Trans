@@ -1,62 +1,86 @@
 notdefined:
   regex: (<var>)\s*\|\|\s*(.+)(?:$|\))
   tokens: [var,value]
+  doc: if variable is defined return variable otherwise a value(var||value)
+ 
+chk_defined:
+  regex: "!(<var>)"
+  tokens: [var]
+  doc: Return False if variable is not defined (!variable)
+
 pipe:
   regex: (.+)\|(.+)$
   tokens: [f1,f2]
+  doc: Pass output from one function to another function as input(fun1|fun2())
   f2:
     call: [pipe]
 print:
   regex: <tab>p(".*")$
   tokens: [tab,str]
+  doc: Print string (p"")
+
 arrow2list:
   regex: (<var>)\s*=>\s*(.+)
   tokens: [fun,list]
 arrow_fun:
   regex: <tab>(<var>)<bracket>\s*=>\s*(.+)
   tokens: [tab,name,args,statement]
+  doc: Map function to list (fun=>list)
+
 arrow:
   regex: \((.*)\)\s*=>\s*(.+)
   tokens: [arg,statement]
+  doc: To create lambda function ((args)=>statement)
 fun:
   regex: fun\s[A-Za-z_]+
   tokens: [name]
+  doc: def into fun
+  
 single_try:
   regex: <tab>try (.+) (.+) (.+)$
   tokens: [tab,try_state,err,except_state]
+  doc: Singleline error handling(try statement exception_class statement)
+
 itself:
   regex: <tab>=(<var>)\.(.+)$
   tokens: [tab,var,rest]
+  doc: Assign return value to same variable after operation(=variable.function())
+
 ternary:
   regex: (=\s*|\()(.+)\?(.+):(.+)($|\))
   tokens: [start,bol,tru,fals,end]
+  doc: Ternary operation(expression?true_statement:false_statement)
   bol,tru,fals:
     replace:
       - [<lstrip>]
       - [<rstrip>]
+
 condition:
   regex: <tab>(<var>)<bracket> if (.+)$
   tokens: [tab,name,args,bol]
+  doc: Call function if expression is true(function() if expression)
+
 #Some Haskell Syntax
 jrange:
   regex: (\d+),(\d+)\.\.(\d+)
   tokens: [jump,start,end]
+  doc: Range of numbers with jump (jump,start..end)
+
 range:
   regex: (,*)(\d+)\.\.(\d+)
   tokens: [comma,start,end]
+  doc: Range of numbers (start..end)
   comma:
     replace:
       - ["^,",",*"]
+#-----------------------
 listrange:
   regex: "!\\[(.+)\\]"
   tokens: [inside]
+  doc: To change into list (![variable/generator/function])
   inside:
     call: [jrange,range]
-
-#-----------------------
-chk_defined:
-  regex: "!(<var>)"
-  tokens: [var]
+    
 settings:
   loop: True
   variables:
