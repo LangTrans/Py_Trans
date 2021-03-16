@@ -89,4 +89,6 @@ settings:
     rstrip: "\\s{1,}$"
     var: "[A-Za-z0-9_]+"
     bracket: \((.+)\)
+  author: Name
+  lang: Python
     
