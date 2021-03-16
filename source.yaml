@@ -28,7 +28,7 @@ arrow_fun:
   doc: Map function to list (fun=>list)
 
 arrow:
-  regex: \(([^\(]+)\)\s*=>\s*(.+)\)*
+  regex: \(([^\(]+)\)\s*=>\s*(.+)
   tokens: [arg,statement]
   doc: To create lambda function ((args)=>statement)
 fun:
