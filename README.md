@@ -1,5 +1,5 @@
 # Python_Trans
-Customize python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
+Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
 ## Customized Syntax
 ```js
 p"Hello World"
