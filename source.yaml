@@ -80,7 +80,15 @@ listrange:
   doc: To change into list (![variable/generator/function])
   inside:
     call: [jrange,range]
-    
+flow:
+  regex: <tab><narrow>\s*->\s*<narrow>\s*->
+  tokens: [tab,arg,fun]
+  doc: To write flow pipe(fun1->fun2->fun3)
+endflow:
+  regex: <tab><narrow>\s*->\s*(.+)$
+  tokens: [tab,arg,fun]
+  doc: To write flow pipe(fun1->fun2) 
+   
 settings:
   loop: True
   variables:
@@ -89,6 +97,7 @@ settings:
     rstrip: "\\s{1,}$"
     var: "[A-Za-z0-9_]+"
     bracket: \((.+)\)
+    narrow: ((?:(?!\s*->\s*).)+) #Not arrow
   author: Name
   lang: Python
     

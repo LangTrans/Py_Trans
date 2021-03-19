@@ -19,3 +19,5 @@ range: <comma>range(<start>,<end>+1)
 jrange: range(<start>,<end>+1,<jump>)
 listrange: list(<inside>)
 chk_defined: "'<var>' not in locals()"
+flow: <tab><fun>(<arg>) ->
+endflow: <tab><fun>(<arg>)

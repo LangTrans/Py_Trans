@@ -13,6 +13,7 @@ test ="test"
 x = True
 print((x||False)?"Done":"Failed")
 print('x is not defined') if !x
+1 -> inc -> print
 ```
 ## Orginal Syntax
 ```python
@@ -31,6 +32,7 @@ x = True
 print("Done" if (x if 'x' in locals() else False) else "Failed")
 if 'x' not in locals():
   print('x is not defined')
+print(inc(1))  
 ```
 
 If you find this more complicated than original or more syntax should be added to it, feel free to edit YAML files with your preference
