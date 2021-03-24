@@ -31,6 +31,7 @@ fun_operation:
 arrow2list:
   regex: (<var>)\s*=>\s*(.+)
   tokens: [fun,list]
+  
 arrow_fun:
   regex: <tab>(<var>)<bracket>\s*=\s*(.+)
   tokens: [tab,name,args,statement]
@@ -93,20 +94,20 @@ flow:
   regex: <tab><narrow>\s*->\s*<narrow>\s*->
   tokens: [tab,arg,fun]
   doc: To write flow pipe(fun1->fun2->fun3)
+  
 endflow:
   regex: <tab><narrow>\s*->\s*(.+)$
   tokens: [tab,arg,fun]
   doc: To write flow pipe(fun1->fun2) 
    
 settings:
-  loop: True
   variables:
-    tab: ^(\t*)
-    lstip: "^\\s{1,}"
-    rstrip: "\\s{1,}$"
-    var: "[A-Za-z0-9_]+"
+    tab: ^(\t*) # Tab before statement
+    lstip: "^\\s{1,}" # Remove space in left
+    rstrip: "\\s{1,}$" # Remove space in right
+    var: "[A-Za-z0-9_]+" # Variable/Function Names
     args: \(((?:(?!\(|\)\)).)+)\) # To get arguments
-    bracket: \((.+)\)
+    bracket: \((.+)\) # Get content inside bracket
     op: (?:\+|-|\*|\\) #Arthematic Operators
     narrow: ((?:(?!\s*->\s*).)+) #Not arrow
   author: Name
