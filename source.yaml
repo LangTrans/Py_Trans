@@ -14,16 +14,25 @@ pipe:
   doc: Pass output from one function to another function as input(fun1|fun2())
   f2:
     call: [pipe]
+
 print:
   regex: <tab>p(".*")$
   tokens: [tab,str]
   doc: Print string (p"")
 
+fun_operation:
+  regex: \((<var>(?:<op><var>)+)\)<args>
+  tokens: [funs,val]
+  funs:
+    replace:
+      - [(<var>),\1(<val>)]
+  doc: To add functions((fun1+fun2)(arg))
+
 arrow2list:
   regex: (<var>)\s*=>\s*(.+)
   tokens: [fun,list]
 arrow_fun:
-  regex: <tab>(<var>)<bracket>\s*=>\s*(.+)
+  regex: <tab>(<var>)<bracket>\s*=\s*(.+)
   tokens: [tab,name,args,statement]
   doc: Map function to list (fun=>list)
 
@@ -96,7 +105,9 @@ settings:
     lstip: "^\\s{1,}"
     rstrip: "\\s{1,}$"
     var: "[A-Za-z0-9_]+"
+    args: \(((?:(?!\(|\)\)).)+)\) # To get arguments
     bracket: \((.+)\)
+    op: (?:\+|-|\*|\\) #Arthematic Operators
     narrow: ((?:(?!\s*->\s*).)+) #Not arrow
   author: Name
   lang: Python

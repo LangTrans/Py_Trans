@@ -1,6 +1,7 @@
 pipe: <f1>(<f2>)
 arrow_fun: "<name> = lambda <args>:<statement>"
 arrow: "lambda <arg>: <statement>"
+fun_operation: <funs>
 arrow2list: map(<fun>,<list>)
 print: <tab>print(<str>)
 fun: def <name>
