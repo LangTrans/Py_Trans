@@ -1,7 +1,7 @@
 # Python_Trans
 Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
 ## Customized Syntax
-```js
+```py
 p"Hello World"
 inc = (x) => x+1
 twice(x) = 2*x
