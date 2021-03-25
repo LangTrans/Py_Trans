@@ -20,6 +20,23 @@ print:
   tokens: [tab,str]
   doc: Print string (p"")
 
+arrow_multline:
+  regex: <args>\s*=>\s*{<i1>3<i2>}
+  tokens: [args,statement]
+  statement:
+    call: [arrow_multline]
+    replace:
+    - [^(\t)*]
+    - [^\n(\t)*]
+    - [\n\t,\n]
+    - [\\n\\t,\\n]
+    - [\n$]
+    - [\n\t$]
+    - [\t,\\t]
+    - [\n,\\n]
+    - ["'''",\\\''']
+    - ['"""',"'''"]
+
 fun_operation:
   regex: \((<var>(?:<op><var>)+)\)<args>
   tokens: [funs,val]
@@ -29,16 +46,16 @@ fun_operation:
   doc: To add functions((fun1+fun2)(arg))
 
 arrow2list:
-  regex: (<var>)\s*=>\s*(.+)
+  regex: (<var>)\s*=>\s*(.+)$
   tokens: [fun,list]
   
 arrow_fun:
-  regex: <tab>(<var>)<bracket>\s*=\s*(.+)
+  regex: <tab>(<var>)<bracket>\s*=\s*(.+)$
   tokens: [tab,name,args,statement]
   doc: Map function to list (fun=>list)
 
 arrow:
-  regex: \(([^\(]+)\)\s*=>\s*(.+)
+  regex: \(([^\(]+)\)\s*=>\s*(.+)$
   tokens: [arg,statement]
   doc: To create lambda function ((args)=>statement)
 fun:
@@ -107,6 +124,8 @@ settings:
     rstrip: "\\s{1,}$" # Remove space in right
     var: "[A-Za-z0-9_]+" # Variable/Function Names
     args: \(((?:(?!\(|\)\)).)+)\) # To get arguments
+    i1: "(\n(\t+?).*(?:(?:\n\\" # For multiline
+    i2: .*)*\n*)*) # End multline
     bracket: \((.+)\) # Get content inside bracket
     op: (?:\+|-|\*|\\) #Arthematic Operators
     narrow: ((?:(?!\s*->\s*).)+) #Not arrow
