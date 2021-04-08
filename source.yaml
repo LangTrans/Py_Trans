@@ -1,3 +1,10 @@
+scope:
+  regex: <tab>#(<var>)#(<lines>)$
+  tokens: [tab,name,statement]
+  statement:
+    eachline: <tab> <line>
+  doc: Implentation of scope(like in javascript)(Syntax:#name#<statement_in_new_line>)
+
 notdefined:
   regex: (<var>)\s*\|\|\s*(.+)(?:$|\))
   tokens: [var,value]

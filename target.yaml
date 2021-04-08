@@ -23,3 +23,7 @@ listrange: list(<inside>)
 chk_defined: "'<var>' not in locals()"
 flow: <tab><fun>(<arg>) ->
 endflow: <tab><fun>(<arg>)
+scope: |
+  <tab>def <name>():
+  <statement>
+  <tab><name>()
