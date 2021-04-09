@@ -114,6 +114,13 @@ listrange:
   doc: To change into list (![variable/generator/function])
   inside:
     call: [jrange,range]
+
+multiline_flow:
+  regex: \n\t*\|>(.+)$
+  tokens: [statements]
+  statements:
+    call: [flow]
+
 flow:
   regex: <tab><narrow>\s*->\s*<narrow>\s*->
   tokens: [tab,arg,fun]

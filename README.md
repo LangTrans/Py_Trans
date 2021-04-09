@@ -1,7 +1,7 @@
 # Python_Trans
 Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
 ## Customized Syntax
-```js
+```py
 p"Hello World"
 inc = (x) => x+1
 twice(x) = 2*x
@@ -13,7 +13,8 @@ test ="test"
 =test.replace("test","")
 print((x||True)?"Done":"Failed")
 print('x is not defined') if !x
-1 -> inc -> print
+1 -> inc
+|> print
 print((inc+twice)(3))
 #scope1#
 print("Scope1")
@@ -40,16 +41,16 @@ test=test.replace("test","")
 print("Done" if (x if 'x' in locals() else True) else "Failed")
 if 'x' not in locals():
    print('x is not defined')
-print(inc(1))
+print(inc(3))
 print(inc(3)+twice(3))
 def scope1():
- print("Scope1")
- print("Done")
+	print("Scope1")
+	print("Done")
 scope1()
 
 def scope2():
- print("scope2")
- print("Done")
+	print("scope2")
+	print("Done")
 scope2()
 ```
 
