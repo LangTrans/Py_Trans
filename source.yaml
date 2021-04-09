@@ -118,8 +118,7 @@ listrange:
 multiline_flow:
   regex: \n\t*\|>(.+)$
   tokens: [statements]
-  statements:
-    call: [flow]
+
 
 flow:
   regex: <tab><narrow>\s*->\s*<narrow>\s*->
