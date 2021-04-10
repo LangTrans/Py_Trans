@@ -15,13 +15,6 @@ chk_defined:
   tokens: [var]
   doc: Return False if variable is not defined (!variable)
 
-pipe:
-  regex: (.+)\|(.+)$
-  tokens: [f1,f2]
-  doc: Pass output from one function to another function as input(fun1|fun2())
-  f2:
-    call: [pipe]
-
 print:
   regex: <tab>p(".*")$
   tokens: [tab,str]
@@ -30,6 +23,7 @@ print:
 arrow_multline:
   regex: <args>\s*=>\s*{<i1>3<i2>}
   tokens: [args,statement]
+  doc: Multiline arrow function(like in javascript)
   statement:
     call: [arrow_multline]
     replace:
@@ -55,6 +49,7 @@ fun_operation:
 arrow2list:
   regex: (<var>)\s*=>\s*(.+)$
   tokens: [fun,list]
+  doc: Function to list
   
 arrow_fun:
   regex: <tab>(<var>)<bracket>\s*=\s*(.+)$
@@ -118,7 +113,9 @@ listrange:
 multiline_flow:
   regex: \n\t*\|>(.+)$
   tokens: [statements]
-
+  doc: Multiline piping
+  statements:
+    call: [flow]
 
 flow:
   regex: <tab><narrow>\s*->\s*<narrow>\s*->
@@ -130,18 +127,32 @@ endflow:
   tokens: [tab,arg,fun]
   doc: To write flow pipe(fun1->fun2) 
    
+make:
+  regex: <tab>make (<var>) (<var>)<bracket>:(\n<sptab>+)(.+<line>*)
+  tokens: [tab,callable,name,tuple,tab2,block]
+  doc: PEP 359 - make statement 
+  block:
+    replace:
+      -  [\n\n$,\n]
+  tuple:
+    replace:
+      - [(\w)$,'\1,']
+
 settings:
   variables:
-    tab: ^(\t*) # Tab before statement
+    sptab: (?:\t|\s{4}) # Space and Tab
+    tab: ^(<sptab>*) # For tab
     lstip: "^\\s{1,}" # Remove space in left
     rstrip: "\\s{1,}$" # Remove space in right
-    var: "[A-Za-z0-9_]+" # Variable/Function Names
+    var: \w+ # Variable/Function Names
     args: \(((?:(?!\(|\)\)).)+)\) # To get arguments
-    i1: "(\n(\t+?).*(?:(?:\n\\" # For multiline
+    i1: (\n(\t+?).*(?:(?:\n\\ # For multiline
     i2: .*)*\n*)*) # End multline
     bracket: \((.+)\) # Get content inside bracket
     op: (?:\+|-|\*|\\) #Arthematic Operators
     narrow: ((?:(?!\s*->\s*).)+) #Not arrow
+    line: (?:\n.+) # For single line
+    lines: <line>+ # For multiple lines
   author: Name
   lang: Python
     
