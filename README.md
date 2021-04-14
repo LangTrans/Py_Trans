@@ -311,11 +311,8 @@ def scope1():
 scope1()
 
 def scope2():
-
     print("scope2")
-
     print("Done")
-
 scope2()
 ```
 
