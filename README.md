@@ -23,31 +23,21 @@ Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans
 
 <td>
 
-<pre>p"Hello World"</pre>
+
+```py
+p"Hello World"
+```
+
 
 </td>
 
 <td>
 
-<pre>print("Hello World")</pre>
 
-</td>
+```py
+print("Hello World")
+```
 
-</tr>
-
-<tr>
-
-
-
-<td>
-
-<pre>inc = (x) => x+1</pre>
-
-</td>
-
-<td>
-
-<pre>inc = lambda x: x+1</pre>
 
 </td>
 
@@ -59,34 +49,21 @@ Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans
 
 <td>
 
-<pre>twice(x) = 2_x
-add(x,y) = x+y</pre>
+
+```py
+inc = (x) => x+1
+```
+
 
 </td>
 
 <td>
 
-<pre>twice = lambda x:2x
-add = lambda x,y:x+y</pre>
 
-</td>
+```py
+inc = lambda x: x+1
+```
 
-</tr>
-
-<tr>
-
-
-
-<td>
-
-<pre>1 -> inc 
-|>print</pre>
-
-</td>
-
-<td>
-
-<pre>print(inc(inc(1)))</pre>
 
 </td>
 
@@ -98,16 +75,79 @@ add = lambda x,y:x+y</pre>
 
 <td>
 
-<pre>try inc("1") Exception print("Error:",err)</pre>
+
+```py
+twice(x) = 2*x
+add(x,y) = x+y
+```
+
 
 </td>
 
 <td>
 
-<pre>try:
+
+```py
+twice = lambda x:2*x
+add = lambda x,y:x+y
+```
+
+
+</td>
+
+</tr>
+
+<tr>
+
+
+
+<td>
+
+
+```py
+1 -> inc 
+|>print
+```
+
+
+</td>
+
+<td>
+
+
+```py
+print(inc(inc(1)))
+```
+
+
+</td>
+
+</tr>
+
+<tr>
+
+
+
+<td>
+
+
+```py
+try inc("1") Exception print("Error:",err)
+```
+
+
+</td>
+
+<td>
+
+
+```py
+try:
   inc("1")
 except Exception as err:
-  print("Error:",err)</pre>
+  print("Error:",err)
+```
+
 
 </td>
 
@@ -119,32 +159,21 @@ except Exception as err:
 
 <td>
 
-<pre>print((x||True)?"Done":"Failed")</pre>
+
+```py
+print((x||True)?"Done":"Failed")
+```
+
 
 </td>
 
 <td>
 
-<pre>print("Done" if (x if 'x' in locals() else True) else "Failed")</pre>
 
-</td>
+```py
+print("Done" if (x if 'x' in locals() else True) else "Failed")
+```
 
-</tr>
-
-<tr>
-
-
-
-<td>
-
-<pre>print('x is not defined') if !x</pre>
-
-</td>
-
-<td>
-
-<pre>if 'x' not in locals():
-   print('x is not defined')</pre>
 
 </td>
 
@@ -156,13 +185,22 @@ except Exception as err:
 
 <td>
 
-<pre>print((inc+twice)(3))</pre>
+
+```py
+print('x is not defined') if !x
+```
+
 
 </td>
 
 <td>
 
-<pre>print(inc(3)+twice(3))</pre>
+
+```py
+if 'x' not in locals():
+   print('x is not defined')
+```
+
 
 </td>
 
@@ -174,7 +212,35 @@ except Exception as err:
 
 <td>
 
-<pre>make type name:#Comment
+
+```py
+print((inc+twice)(3))
+```
+
+
+</td>
+
+<td>
+
+
+```py
+print(inc(3)+twice(3))
+```
+
+
+</td>
+
+</tr>
+
+<tr>
+
+
+
+<td>
+
+
+```py
+make type name:#Comment
     x = 1
     pass
     y = 3
@@ -183,13 +249,17 @@ make dict test:#Comment
     this =  "this"
     if this == "this":
         pass
-    that = "that"</pre>
+    that = "that"
+```
+
 
 </td>
 
 <td>
 
-<pre>def name():
+
+```py
+def name():
     x = 1
     return locals()
     y = 3
@@ -203,7 +273,9 @@ def test():
     that = "that"
     return locals()
 
-test = test()</pre>
+test = test()
+```
+
 
 </td>
 
@@ -215,19 +287,25 @@ test = test()</pre>
 
 <td>
 
-<pre>#scope1#
+
+```py
+#scope1#
 print("Scope1")
 print("Done")
 
 #scope2#
 print("scope2")
-print("Done")</pre>
+print("Done")
+```
+
 
 </td>
 
 <td>
 
-<pre>def scope1():
+
+```py
+def scope1():
     print("Scope1")
     print("Done")
 scope1()
@@ -238,7 +316,9 @@ def scope2():
 
     print("Done")
 
-scope2()</pre>
+scope2()
+```
+
 
 </td>
 
