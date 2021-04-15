@@ -1,3 +1,4 @@
+pipe: <tab><f1>(<f2>)
 arrow_fun: "<name> = lambda <args>:<statement>"
 arrow: "lambda <arg>: <statement>"
 fun_operation: <funs>
@@ -30,3 +31,6 @@ scope: |
 make: |
   <tab>def <name>():<tab2><block><tab2>return locals()
   <tab><name> = <callable>("<name>", (<tuple>), <name>())
+make_dict: |
+  <tab>def <name>():<tab2><block><tab2>return locals()
+  <tab><name> = <name>()

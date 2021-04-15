@@ -132,6 +132,32 @@ print(inc(inc(1)))
 
 
 ```py
+print<-inc<-inc<-1
+```
+
+
+</td>
+
+<td>
+
+
+```py
+print(inc(inc(1)))
+```
+
+
+</td>
+
+</tr>
+
+<tr>
+
+
+
+<td>
+
+
+```py
 try inc("1") Exception print("Error:",err)
 ```
 

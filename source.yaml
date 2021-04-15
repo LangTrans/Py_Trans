@@ -15,6 +15,14 @@ chk_defined:
   tokens: [var]
   doc: Return False if variable is not defined (!variable)
 
+
+pipe:
+  regex: <tab>(<var>)\s*<-\s*(.+)$
+  tokens: [tab,f1,f2]
+  f2:
+    call: [pipe]
+  doc: Pass output from one function to another function as input(fun1<-fun2())
+
 print:
   regex: <tab>p(".*")$
   tokens: [tab,str]
@@ -61,7 +69,7 @@ arrow:
   tokens: [arg,statement]
   doc: To create lambda function ((args)=>statement)
 fun:
-  regex: fun\s[A-Za-z_]+
+  regex: fun\s([A-Za-z_]+)
   tokens: [name]
   doc: def into fun
   
@@ -125,34 +133,52 @@ flow:
 endflow:
   regex: <tab><narrow>\s*->\s*(.+)$
   tokens: [tab,arg,fun]
-  doc: To write flow pipe(fun1->fun2) 
-   
+  doc: To write flow pipe(fun1->fun2)
+ 
+make_dict:
+  regex: <tab>make dict (<var>):<tablock>
+  tokens: [tab,name,tab2,block]
+  block:
+    replace:
+      -  [\n\n$,\n]
+      - [\bpass\b,return locals()]
+
 make:
-  regex: <tab>make (<var>) (<var>)<bracket>:(\n<sptab>+)(.+<line>*)
+  regex: <tab>make (<var>) (<var>)<bracket>:<tablock>
   tokens: [tab,callable,name,tuple,tab2,block]
   doc: PEP 359 - make statement 
   block:
     replace:
       -  [\n\n$,\n]
+      - [\bpass\b,return locals()]
   tuple:
     replace:
       - [(\w)$,'\1,']
 
+__make:
+  regex: <tab>make (<var>) (<var>)():<tablock>
+  block:
+    replace:
+      -  [\n\n$,\n]
+      - [\bpass\b,return locals()]
 settings:
   variables:
-    sptab: (?:\t|\s{4}) # Space and Tab
+    sptab: (?:(?:\t|\s)+) # Space and Tab
     tab: ^(<sptab>*) # For tab
     lstip: "^\\s{1,}" # Remove space in left
     rstrip: "\\s{1,}$" # Remove space in right
     var: \w+ # Variable/Function Names
-    args: \(((?:(?!\(|\)\)).)+)\) # To get arguments
-    i1: (\n(\t+?).*(?:(?:\n\\ # For multiline
+    bracket: \((.*)\) # Get content inside bracket
+    spvar: \s*\w+\s* # Variable Name with space around
+    args: \((<spvar>(?:,<spvar>)*)\) # To get arguments
+    i1: (\n(?:<sptab>+?).*(?:(?:\n\\ # For multiline
     i2: .*)*\n*)*) # End multline
-    bracket: \((.+)\) # Get content inside bracket
     op: (?:\+|-|\*|\\) #Arthematic Operators
-    narrow: ((?:(?!\s*->\s*).)+) #Not arrow
+    narrow: ((?:(?!\s*->).)+) #Not arrow
     line: (?:\n.+) # For single line
     lines: <line>+ # For multiple lines
+    # To get indentation level and block of statements
+    tablock: .*(\n<sptab>+)(.+<line>*)
   author: Name
   lang: Python
     
