@@ -105,7 +105,7 @@ add = lambda x,y:x+y
 
 
 ```py
-1 -> inc 
+1 -> inc -> twice
 |>print
 ```
 
@@ -116,7 +116,7 @@ add = lambda x,y:x+y
 
 
 ```py
-print(inc(inc(1)))
+print(twice(inc(1)))
 ```
 
 
@@ -132,7 +132,7 @@ print(inc(inc(1)))
 
 
 ```py
-print<-inc<-inc<-1
+print<-inc<-twice<-1
 ```
 
 
@@ -142,7 +142,7 @@ print<-inc<-inc<-1
 
 
 ```py
-print(inc(inc(1)))
+print(inc(twice(1)))
 ```
 
 
@@ -266,7 +266,7 @@ print(inc(3)+twice(3))
 
 
 ```py
-make type name:#Comment
+make type name(object):
     x = 1
     pass
     y = 3
@@ -290,7 +290,7 @@ def name():
     return locals()
     y = 3
     return locals()
-name = type("name", (), name())
+name = type("name", (object,), name())
 
 def test():
     this =  "this"
