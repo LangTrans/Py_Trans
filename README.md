@@ -1,6 +1,6 @@
 # Python_Trans
 Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
-## Customized Syntax
+
 <table>
 
 <thead>
@@ -241,6 +241,8 @@ if 'x' not in locals():
 
 ```py
 print((inc+twice)(3))
+print((inc*twice)(3))
+print((inc\twice)(3))
 ```
 
 
@@ -251,6 +253,8 @@ print((inc+twice)(3))
 
 ```py
 print(inc(3)+twice(3))
+print(inc(3)*twice(3))
+print(inc(3)\twice(3))
 ```
 
 
@@ -271,7 +275,7 @@ make type name(object):
     pass
     y = 3
 
-make dict test:#Comment
+make dict test:
     this =  "this"
     if this == "this":
         pass
