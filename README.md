@@ -1,4 +1,4 @@
-# Python_Trans
+# Py_Trans
 Customized python syntax with [LangTrans](https://github.com/LangTrans/LangTrans)
 
 <table>
@@ -105,8 +105,8 @@ add = lambda x,y:x+y
 
 
 ```py
-1 -> inc -> twice
-|>print
+1 -> inc
+|> twice -> print
 ```
 
 
@@ -241,8 +241,6 @@ if 'x' not in locals():
 
 ```py
 print((inc+twice)(3))
-print((inc*twice)(3))
-print((inc\twice)(3))
 ```
 
 
@@ -253,8 +251,6 @@ print((inc\twice)(3))
 
 ```py
 print(inc(3)+twice(3))
-print(inc(3)*twice(3))
-print(inc(3)\twice(3))
 ```
 
 
@@ -272,13 +268,14 @@ print(inc(3)\twice(3))
 ```py
 make type name(object):
     x = 1
-    pass
+    if x==1:
+      pass
     y = 3
 
 make dict test:
     this =  "this"
     if this == "this":
-        pass
+      pass
     that = "that"
 ```
 
@@ -291,7 +288,8 @@ make dict test:
 ```py
 def name():
     x = 1
-    return locals()
+    if x==1:
+      return locals()
     y = 3
     return locals()
 name = type("name", (object,), name())
@@ -324,7 +322,7 @@ print("Scope1")
 print("Done")
 
 #scope2#
-print("scope2")
+print("Scope2")
 print("Done")
 ```
 
@@ -341,7 +339,7 @@ def scope1():
 scope1()
 
 def scope2():
-    print("scope2")
+    print("Scope2")
     print("Done")
 scope2()
 ```
